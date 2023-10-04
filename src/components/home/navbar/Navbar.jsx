@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "../../../assets/styles/navbar.css";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,12 +9,22 @@ import SmsRoundedIcon from "@mui/icons-material/SmsRounded";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
 import NavFeature from "./NavFeature";
-import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
-import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import ProfileMenu from "./ProfileMenu";
 import { Link } from "react-router-dom";
+import LoginDialog from "../../userAuth/LoginDialog";
 
 const Navbar = () => {
+
+  const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
+  const [showLoginDialog, setShowLoginDialog] = useState(false)
+
+  const handleNavClick = (e)=>{
+    if (!isLoggedIn) {
+      e.preventDefault();
+      setShowLoginDialog(true);
+
+    }
+  }
 
   return (
     <div className="nav-container">
@@ -32,17 +42,20 @@ const Navbar = () => {
           Icon={PeopleAltIcon}
           title={"My Network"}
           toPath={"/mynetwork"}
+          onClickFunc={handleNavClick}
         />
         <NavFeature Icon={WorkIcon} title={"Jobs"} toPath={"/jobs"} />
         <NavFeature
           Icon={SmsRoundedIcon}
           title={"Messaging"}
           toPath={"/messages"}
+          onClickFunc={handleNavClick}
         />
         <NavFeature
           Icon={NotificationsRoundedIcon}
           title={"Notification"}
           toPath={"/notifications"}
+          onClickFunc={handleNavClick}
         />
 
         <ProfileMenu/>
@@ -58,6 +71,7 @@ const Navbar = () => {
           <span>Try Premium Free.</span>
         </section>
       </div>
+      <LoginDialog open={showLoginDialog} setOpen={setShowLoginDialog}/>
     </div>
   );
 };

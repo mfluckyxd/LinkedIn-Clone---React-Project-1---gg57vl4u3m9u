@@ -1,17 +1,21 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-const NavFeature = ({Icon, title, toPath,reqClass}) => {
-  const classNames = `nav-item ${reqClass || ''}`;
-  return (
+const NavFeature = ({ Icon, title, toPath, reqClass, onClickFunc }) => {
+  const classNames = `nav-item ${reqClass || ""}`;
 
-    <div className={classNames}>
-        <NavLink to={toPath}>
-            <Icon></Icon>
-            <span>{title}</span>
-        </NavLink>
-    </div>
-  )
-}
+  const navLink = onClickFunc ? (
+    <NavLink to={toPath} onClick={onClickFunc}>
+      <Icon />
+      <span>{title}</span>
+    </NavLink>
+  ) : (
+    <NavLink to={toPath}>
+      <Icon />
+      <span>{title}</span>
+    </NavLink>
+  );
+  return <div className={classNames}> {navLink}</div>;
+};
 
-export default NavFeature
+export default NavFeature;

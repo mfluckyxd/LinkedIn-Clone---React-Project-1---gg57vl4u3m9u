@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
 import Feed from "./feed/Feed";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Home = () => {
   return (
@@ -12,10 +13,10 @@ const Home = () => {
       
       <Routes>
       <Route path="/" element={<Feed/>} />
-        <Route path="/mynetwork" element={<div>network section</div>}/>
+        <Route path="/mynetwork" element={<ProtectedRoute Component={<div>network section</div>}/>}/>
         <Route path="/jobs" element={<div>jobs section</div>}/>
-        <Route path="messages" element={<div>msg section</div>}/>
-        <Route path="notifications" element={<div>notification section</div>}/>
+        <Route path="messages" element={<ProtectedRoute Component={<div>msg section</div>}/>}/>
+        <Route path="notifications" element={<ProtectedRoute Component={<div>notification section</div>}/>}/>
         <Route path="business" element={<div>business section</div>}/>
         
       </Routes>
