@@ -29,7 +29,7 @@ const ProfileMenu = () => {
 
   const userName = sessionStorage.getItem("userName");
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
-  console.log(typeof(isLoggedIn));
+  
 
   const handleLogOut =()=>{
     sessionStorage.removeItem('authToken')
@@ -101,6 +101,7 @@ const ProfileMenu = () => {
                 variant="outlined"
                 size="small"
                 sx={{ borderRadius: "25px", width: "100%", height: "25px" }}
+                onClick={()=>{handleClose();navigate('/profile')}}
               >
                 Profile
               </Button>

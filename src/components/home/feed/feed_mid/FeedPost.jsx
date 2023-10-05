@@ -4,27 +4,12 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import SendIcon from "@mui/icons-material/Send";
 
-import React,{useState, useEffect} from 'react'
-import LoginDialog from '../../../userAuth/LoginDialog';
+import React from 'react'
 
-const FeedPost = ({feedPost}) => {
-    console.log(feedPost);
-    const [showLoginDialog, setShowLoginDialog] = useState(false)
-    const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
-    const handleUpVote = ()=>{
-        if (isLoggedIn) {
-            
-        }else{
-            setShowLoginDialog(true)
-        }
-    }
-    const handleComment = ()=>{
-        if (isLoggedIn) {
-            
-        }else{
-            setShowLoginDialog(true)
-        }
-    }
+
+const FeedPost = ({feedPost,handleUpVote,handleComment}) => {
+    
+
 
     
   return (
@@ -50,12 +35,12 @@ const FeedPost = ({feedPost}) => {
             
         </section>
         
-        <section className="post-feature">
-            <button onClick={handleUpVote} className="post-like"><ThumbUpOffAltIcon /> <span>Like</span></button>
+        <section id={feedPost._id} className="post-feature">
+            <button onClick={()=>handleUpVote(feedPost._id)} className="post-like"><ThumbUpOffAltIcon /> <span>Like</span></button>
             <button onClick={handleComment} className="post-comment"><ChatBubbleOutlineIcon /><span>Comment</span></button>
             <button className="post-share"><SendIcon /><span>Share</span></button>
         </section>
-        <LoginDialog open={showLoginDialog} setOpen={setShowLoginDialog}/>
+        
 
     </div>
   )

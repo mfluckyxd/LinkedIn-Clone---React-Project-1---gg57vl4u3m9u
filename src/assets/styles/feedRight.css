@@ -13,10 +13,10 @@
   justify-content: space-between;
   margin-top: -40px;
 }
-.MuiButtonBase-root:hover {
+.news-heading .MuiButtonBase-root:hover {
   background-color: transparent !important;
 }
-.MuiButtonBase-root {
+.news-heading .MuiButtonBase-root {
   margin-right: -30px;
 }
 .news-list {

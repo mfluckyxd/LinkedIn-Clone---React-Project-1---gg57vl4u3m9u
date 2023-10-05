@@ -73,7 +73,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const res = await signUpApi(userInfo);
-      console.log(res);
+      
       if (!res.success) {
         setSignUpError(res.msg);
         console.log(signUpError);

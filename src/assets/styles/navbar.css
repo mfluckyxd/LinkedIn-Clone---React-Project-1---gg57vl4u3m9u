@@ -54,6 +54,7 @@
 .nav-right{
     display: flex;
     gap: 2rem;
+    background-color: transparent;
     
 }
 #profileIcon{
@@ -71,6 +72,7 @@
     overflow: hidden; 
     text-overflow: ellipsis; 
     max-width: 100%;
+    
 }
 .nav-premium span{
     text-decoration: underline;

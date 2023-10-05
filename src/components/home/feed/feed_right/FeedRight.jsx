@@ -12,7 +12,7 @@ const FeedRight = () => {
           <div className="news-heading">
             <h4>LinkedIn News</h4>
             <Tooltip title="These are the day’s top professional news stories and conversations.">
-              <IconButton>
+              <IconButton >
                 <ErrorIcon />
               </IconButton>
             </Tooltip>

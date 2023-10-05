@@ -49,6 +49,3 @@
     align-items: center;
     gap: 2rem;
 }
-.login-alert-dialog .MuiButtonBase-root:hover{
-    background-color: #063f77 !important;
-}

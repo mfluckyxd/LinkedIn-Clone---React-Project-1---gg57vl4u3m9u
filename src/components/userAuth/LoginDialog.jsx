@@ -19,7 +19,7 @@ const LoginDialog = ({open, setOpen}) => {
   return (
     <div>
       
-      <Dialog open={open} onClose={handleClose} BackdropClick={true}>
+      <Dialog open={open} onClose={handleClose} BackdropProps={{ onClick: handleClose }}>
         {/* Add your dialog content here */}
         <div className="login-alert-dialog">
         <Alert severity="error">Please Sign In to Continue</Alert>

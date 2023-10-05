@@ -1,21 +1,12 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import React, { useEffect } from "react";
+import { Navigate } from "react-router";
 
 const ProtectedRoute = ({ Component }) => {
-  const navigate = useNavigate();
-  const isLoggedIn = JSON.parse(sessionStorage.getItem('loginStatus'));
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login');
-    }
-  }, []); 
+  const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
 
   if (!isLoggedIn) {
-    
-    return <div>Redirecting to login...</div>;
+    return <Navigate to={"/login"} />;
   }
-
   return <div>{Component}</div>;
 };
 
