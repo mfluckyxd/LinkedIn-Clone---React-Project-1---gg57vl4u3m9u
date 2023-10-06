@@ -93,7 +93,7 @@ const FeedMid = () => {
                 <span>Article</span>
               </button>
             </div>
-            <NewPostDialog open={showNewPostDialog} setOpen={setShowNewPostDialog} setFeedPosts={setFeedPosts} feedPosts={feedPosts}/>
+            <NewPostDialog open={showNewPostDialog} setOpen={setShowNewPostDialog} setFeedPosts={setFeedPosts}/>
           </section>
         )}
 

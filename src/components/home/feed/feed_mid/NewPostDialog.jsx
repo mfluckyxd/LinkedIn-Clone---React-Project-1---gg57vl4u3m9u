@@ -3,11 +3,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import "../../../../assets/styles/newPostDialog.css";
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router";
 
-const NewPostDialog = ({ open, setOpen, setFeedPosts, feedPosts }) => {
+
+const NewPostDialog = ({ open, setOpen, setFeedPosts }) => {
   const userName = sessionStorage.getItem("userName");
-  const navigate = useNavigate();
+  
   const fileInputRef = useRef(null);
 
   const [userInputs, setuserInputs] = useState({
