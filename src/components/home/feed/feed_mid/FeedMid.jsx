@@ -8,12 +8,23 @@ import { getPosts } from "../../../../utils/apis/getPostAPI";
 import FeedPost from "./FeedPost";
 import LoginDialog from "../../../userAuth/LoginDialog";
 import { upVotePostApi } from "../../../../utils/apis/userActionAPIs";
+import NewPostDialog from "./NewPostDialog";
+import { useNavigate } from "react-router";
 
 const FeedMid = () => {
   const [feedPosts, setFeedPosts] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
+
+  const [newpostData, setNewPostData] = useState({})
+  const [showNewPostDialog, setShowNewPostDialog] = useState(false);
+
+  const navigate = useNavigate()
+
+  const handleNewPostDialog = ()=>{
+    setShowNewPostDialog(true)
+  }
 
   const fetchPosts = async () => {
     try {
@@ -52,8 +63,10 @@ const FeedMid = () => {
         {isLoggedIn && (
           <section className="new-post">
             <div className="new-post-form">
-              <Avatar sx={{ height: 60, width: 60 }} />
+              <Avatar sx={{ height: 60, width: 60, cursor:'pointer' }} onClick={()=>navigate('/profile')}/>
               <input
+
+              onClick={handleNewPostDialog}
                 type="text"
                 name="text"
                 id="newPost"
@@ -61,30 +74,31 @@ const FeedMid = () => {
               />
             </div>
             <div className="new-post-icons">
-              <button className="post-option">
+              <button className="post-option" onClick={handleNewPostDialog}>
                 <InsertPhotoIcon
                   style={{ color: "#70b5f9", height: "25px", width: "25px" }}
                 />
                 <span>Media</span>
               </button>
-              <button className="post-option">
+              <button className="post-option" onClick={handleNewPostDialog}>
                 <EventIcon
                   style={{ color: "#a872e8", height: "25px", width: "25px" }}
                 />
                 <span>Event</span>
               </button>
-              <button className="post-option">
+              <button className="post-option" onClick={handleNewPostDialog}>
                 <ArticleIcon
                   style={{ color: "#e16745", height: "25px", width: "25px" }}
                 />
                 <span>Article</span>
               </button>
             </div>
+            <NewPostDialog open={showNewPostDialog} setOpen={setShowNewPostDialog} setFeedPosts={setFeedPosts} feedPosts={feedPosts}/>
           </section>
         )}
 
         <section className="feed-posts">
-          {feedPosts.reverse().map((feedPost) => (
+          {feedPosts.map((feedPost) => (
             <FeedPost
               key={feedPost._id}
               feedPost={feedPost}
