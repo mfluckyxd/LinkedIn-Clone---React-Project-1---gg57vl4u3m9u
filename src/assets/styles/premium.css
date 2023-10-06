@@ -1,5 +1,8 @@
-.premium-top-section{
+.premium-top-container{
     background-color: #fff;
+    padding: 0 2rem;
+}
+.premium-top-section{
     height: auto;
     width: 100%;
     text-align: center;
@@ -8,7 +11,8 @@
     align-items: center;
     color: #666666;
     gap: 1.5rem;
-    padding: 2rem;
+    padding: 2rem 0;
+    
 }
 .premium-top-section div{
     display: flex;
@@ -68,4 +72,10 @@
 .submit-btn{
     text-align: right;
     margin: 1rem;
+}
+
+@media (max-width:650px) {
+    .premium-bottom-section{
+        width: 90%;
+    }
 }

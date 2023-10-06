@@ -75,4 +75,8 @@
     color: #666666;
 }
 
-
+@media (max-width:650px) {
+  .feed-left-recent{
+    display: none;
+  }
+}

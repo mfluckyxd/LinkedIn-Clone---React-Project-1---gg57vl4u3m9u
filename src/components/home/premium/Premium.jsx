@@ -7,30 +7,33 @@ const Premium = () => {
   return (
     <div className="premium-section-container">
       <Divider />
-      <section className="premium-top-section">
-        <h3>Achieve your goals faster with Premium.</h3>
-        <div>
-          <Avatar
-            sx={{ width: "50px", height: "50px", marginRight: "-25px" }}
-            src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/651.jpg"
-          />
-          <Avatar
-            sx={{ width: "50px", height: "50px", marginRight: "-25px" }}
-            src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/188.jpg"
-          />
-          <Avatar
-            sx={{ width: "50px", height: "50px", marginRight: "-25px" }}
-            src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1149.jpg"
-          />
-          <p style={{ marginLeft: "2rem" }}>
-            Darrel and millions of other members use Premium.
+      <div className="premium-top-container">
+        <section className="premium-top-section">
+          <h3>Achieve your goals faster with Premium.</h3>
+          <div>
+            <Avatar
+              sx={{ width: "50px", height: "50px", marginRight: "-25px" }}
+              src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/651.jpg"
+            />
+            <Avatar
+              sx={{ width: "50px", height: "50px", marginRight: "-25px" }}
+              src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/188.jpg"
+            />
+            <Avatar
+              sx={{ width: "50px", height: "50px", marginRight: "-25px" }}
+              src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1149.jpg"
+            />
+            <p style={{ marginLeft: "2rem" }}>
+              Darrel and millions of other members use Premium.
+            </p>
+          </div>
+          <p>
+            Start your free 1-month trial today. Cancel anytime. We’ll send you
+            a reminder 7 days before your trial ends.
           </p>
-        </div>
-        <p>
-          Start your free 1-month trial today. Cancel anytime. We’ll send you a
-          reminder 7 days before your trial ends.
-        </p>
-      </section>
+        </section>
+      </div>
+
       <section className="premium-bottom-section">
         <h4>
           {userName} are you interested in Premium for work or personal use?{" "}
@@ -50,9 +53,11 @@ const Premium = () => {
             <span>Other</span>
           </section>
         </div>
-        <Divider/>
+        <Divider />
         <div className="submit-btn">
-            <Button variant="contained" sx={{borderRadius:'25px'}}>Submit</Button>
+          <Button variant="contained" sx={{ borderRadius: "25px" }}>
+            Submit
+          </Button>
         </div>
       </section>
     </div>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import "../../../assets/styles/navbar.css";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import SearchIcon from "@mui/icons-material/Search";
@@ -18,6 +18,13 @@ const Navbar = () => {
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
   const [showLoginDialog, setShowLoginDialog] = useState(false)
 
+  const searchBarRef = useRef(null)
+  const focusSearchBar = ()=>{
+    if (searchBarRef.current) {
+      searchBarRef.current.focus();
+    }
+  }
+
   const handleNavClick = (e)=>{
     if (!isLoggedIn) {
       e.preventDefault();
@@ -32,8 +39,8 @@ const Navbar = () => {
         <Link to={'/'}><LinkedInIcon style={{ color: "blue", fontSize: "45px" }} /></Link>
         
         <section id="searchBox">
-          <SearchIcon />
-          <input type="text" />
+          <SearchIcon onClick={focusSearchBar} />
+          <input ref={searchBarRef} type="text" />
         </section>
       </div>
       <div className="nav-right">

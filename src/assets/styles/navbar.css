@@ -1,13 +1,13 @@
 .nav-container{
     display: flex;
     justify-content: space-between;
-    padding: 5px 15px;
     background-color: white;
     height: 3rem;
     align-items: center;
     padding: 0px 10%;
     overflow-wrap: normal;
     position: sticky;
+    z-index: 3;
     
 }
 .nav-left{
@@ -27,6 +27,10 @@
     background: transparent;
     border: none;
     outline: none;
+}
+.nav-item{
+    display: flex;
+    align-items: center;
 }
 .nav-item a{
     display: flex;
@@ -54,7 +58,7 @@
 .nav-right{
     display: flex;
     gap: 2rem;
-    background-color: transparent;
+    /* background-color: transparent; */
     
 }
 #profileIcon{
@@ -83,3 +87,26 @@
         display: none;
     }
 }
+@media (max-width: 650px){
+    .nav-container{
+        overflow: auto;
+        padding: 0;
+        justify-content: space-evenly;
+    }
+    /* #searchBox{
+        width: auto;
+    }
+    #searchBox input{
+        width: 5vw;
+    }
+    #searchBox input:focus{
+        display: block;
+        width: 20vw;
+    } */
+    .nav-right{
+        gap: 5vw;
+    }
+   
+      
+}
+

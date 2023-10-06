@@ -24,4 +24,14 @@
 }
 
 
-
+@media (max-width:650px) {
+  .feed-right{
+    display: none;
+  }
+  .feed-section{
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem;
+    gap: 1.5rem;
+  }
+}
