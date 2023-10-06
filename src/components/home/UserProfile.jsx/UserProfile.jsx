@@ -3,10 +3,12 @@ import "../../../assets/styles/userProfile.css";
 import { Avatar, Button } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useNavigate } from "react-router";
 
 
 const UserProfile = () => {
   const userName = sessionStorage.getItem("userName");
+  const navigate = useNavigate()
 
   return (
     <div className="profile-main-container">
@@ -80,7 +82,7 @@ const UserProfile = () => {
             <div style={{textAlign:'center', fontSize:'0.86rem', margin:'1rem'}}>{userName}, boost your job search with premium</div>
             <div className="avatar-icons"><Avatar sx={{backgroundColor:'#095faa'}}>R</Avatar><Avatar sx={{backgroundColor:'#aa0941'}}>KL</Avatar></div>
             <div style={{textAlign:'center', fontSize:'0.86rem', margin:'1rem'}}>See who's viewed your profile in last 90 days</div>
-            <div><Button variant="outlined" sx={{borderRadius:'25px'}}>Try for FREE</Button></div>
+            <div><Button onClick={()=>{navigate('/premium')}} variant="outlined" sx={{borderRadius:'25px'}}>Try for FREE</Button></div>
           </div>
         </section>
       </div>

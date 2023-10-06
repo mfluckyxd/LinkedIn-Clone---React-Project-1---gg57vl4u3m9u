@@ -10,7 +10,7 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
 import NavFeature from "./NavFeature";
 import ProfileMenu from "./ProfileMenu";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import LoginDialog from "../../userAuth/LoginDialog";
 
 const Navbar = () => {
@@ -67,8 +67,11 @@ const Navbar = () => {
           toPath={"/business"}
         />
         <section className="nav-premium">
+          <NavLink className="nav-premium" to={'/premium'}>
+
           <span>Get Hired Faster.</span>
           <span>Try Premium Free.</span>
+          </NavLink>
         </section>
       </div>
       <LoginDialog open={showLoginDialog} setOpen={setShowLoginDialog}/>

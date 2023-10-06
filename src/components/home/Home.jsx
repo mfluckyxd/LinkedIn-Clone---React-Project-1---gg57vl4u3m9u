@@ -6,6 +6,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import MyNetwork from "./network/MyNetwork";
 import Jobs from "./jobs/Jobs";
 import UserProfile from "./UserProfile.jsx/UserProfile";
+import Notification from "./notification/Notification";
+import Premium from "./premium/Premium";
 
 const Home = () => {
   return (
@@ -19,9 +21,10 @@ const Home = () => {
         <Route path="/mynetwork" element={<ProtectedRoute Component={<MyNetwork/>}/>}/>
         <Route path="/jobs" element={<Jobs/>}/>
         <Route path="/messages" element={<ProtectedRoute Component={<div>msg section</div>}/>}/>
-        <Route path="/notifications" element={<ProtectedRoute Component={<div>notification section</div>}/>}/>
+        <Route path="/notifications" element={<ProtectedRoute Component={<Notification/>}/>}/>
         <Route path="/business" element={<div>business section</div>}/>
         <Route path='/profile' element={<ProtectedRoute Component={<UserProfile/>}/>}/>
+        <Route path='/premium' element={<Premium/>}/>
         
       </Routes>
       </div>

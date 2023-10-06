@@ -109,7 +109,7 @@ const ProfileMenu = () => {
 
             <Divider />
             <Typography variant="subtitle1">Accounts</Typography>
-            <MenuItem>Try premium for free.</MenuItem>
+            <MenuItem onClick={()=>{handleClose();navigate('/premium')}} >Try premium for free.</MenuItem>
             <MenuItem>Settings & Privacy</MenuItem>
             <MenuItem>Help</MenuItem>
             <MenuItem>Languages</MenuItem>
