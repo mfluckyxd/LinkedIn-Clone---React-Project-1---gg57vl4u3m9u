@@ -20,7 +20,7 @@ const FeedPost = ({ feedPost, handleUpVote, handleComment }) => {
           </div>
           <div className="about-user">
             <h4>{feedPost.author.name}</h4>
-            <p>{feedPost.channel.name||''}</p>
+            <p>{feedPost.channel.name||'Software Devloper'}</p>
           </div>
         </div>
         <div className="header-right">

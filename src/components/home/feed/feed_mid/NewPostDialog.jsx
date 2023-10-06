@@ -15,19 +15,18 @@ const NewPostDialog = ({ open, setOpen, setFeedPosts, feedPosts }) => {
     content: "",
   });
 
-  const [newPostData, setNewpostData] = useState({
-    author: {
-      name: userName,
-    },
-    content: userInputs.content,
-    channel: { image: userInputs.imageSrc },
-  });
+
   const handleSubmit = () => {
-    const currentFeedPosts = [...feedPosts];
 
-    currentFeedPosts.unshift(newPostData);
-
-    setFeedPosts(currentFeedPosts);
+    const newPost = {
+      author: {
+        name: userName,
+      },
+      content: userInputs.content,
+      channel: { image: userInputs.imageSrc },
+    };
+  
+    setFeedPosts((prevFeedPosts) => [newPost, ...prevFeedPosts]);
 
     setuserInputs({
       imageSrc: "",
@@ -49,6 +48,7 @@ const NewPostDialog = ({ open, setOpen, setFeedPosts, feedPosts }) => {
         ...prevData,
         imageSrc: imageUrl,
       }));
+      console.log(userInputs);
     }
   };
 
@@ -58,6 +58,8 @@ const NewPostDialog = ({ open, setOpen, setFeedPosts, feedPosts }) => {
       ...prevData,
       content: value,
     }));
+    console.log(userInputs);
+
   };
   const handleClose = () => {
     setOpen(false);

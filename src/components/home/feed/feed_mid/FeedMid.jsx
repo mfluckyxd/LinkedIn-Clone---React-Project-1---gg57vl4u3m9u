@@ -17,7 +17,7 @@ const FeedMid = () => {
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
 
-  const [newpostData, setNewPostData] = useState({})
+
   const [showNewPostDialog, setShowNewPostDialog] = useState(false);
 
   const navigate = useNavigate()
