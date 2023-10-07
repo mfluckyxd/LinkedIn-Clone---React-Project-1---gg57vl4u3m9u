@@ -45,7 +45,7 @@ const FeedMid = () => {
   };
 
   const handleUpVote = async (postID) => {
-    if (isLoggedIn) 
+    if (isLoggedIn) {
 
       if (!likedPosts[postID]) {
         console.log(postID);
