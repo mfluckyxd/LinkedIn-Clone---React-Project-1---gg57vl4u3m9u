@@ -32,9 +32,11 @@ export const signInApi = async (userInfo)=>{
             headers
           );
           
-          console.log('while saving' ,res.data.token);
+          // console.log('while login' ,res.data.token);
           sessionStorage.setItem("authToken", res.data.token);
+          
           sessionStorage.setItem("userName", res.data.data.name);
+          sessionStorage.setItem("userId", res.data.data._id);
           sessionStorage.setItem("loginStatus", JSON.stringify(true));
           
           return{

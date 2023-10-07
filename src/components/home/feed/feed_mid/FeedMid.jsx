@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../../../assets/styles/feedMid.css";
-import { Avatar } from "@mui/material";
+import { Avatar, CircularProgress } from "@mui/material";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import ArticleIcon from "@mui/icons-material/Article";
 import EventIcon from "@mui/icons-material/Event";
@@ -10,12 +10,17 @@ import LoginDialog from "../../../userAuth/LoginDialog";
 import { upVotePostApi } from "../../../../utils/apis/userActionAPIs";
 import NewPostDialog from "./NewPostDialog";
 import { useNavigate } from "react-router";
+import { Margin } from "@mui/icons-material";
 
 const FeedMid = () => {
   const [feedPosts, setFeedPosts] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
+
+  const [likedPosts, setLikedPosts] = useState({})
+
+  const [isFeedLoading, setIsFeedLoading] = useState(false)
 
   const [showNewPostDialog, setShowNewPostDialog] = useState(false);
 
@@ -27,32 +32,68 @@ const FeedMid = () => {
 
   const fetchPosts = async () => {
     try {
+      setIsFeedLoading(true)
       const res = await getPosts(pageNo);
       if (res.success) {
         setFeedPosts(res.data);
       }
     } catch (error) {
       console.log(error);
+    }finally{
+      setIsFeedLoading(false)
     }
   };
 
   const handleUpVote = async (postID) => {
     if (isLoggedIn) {
-      try {
-        const res = await upVotePostApi(postID);
-        console.log(res);
-        if (res.status) {
-          setFeedPosts((prevFeedPosts) =>
+
+      if (!likedPosts[postID]) {
+        console.log(postID);
+        console.log('inside if', likedPosts);
+        setFeedPosts((prevFeedPosts) =>
             prevFeedPosts.map((post) =>
               post._id === postID
                 ? { ...post, likeCount: post.likeCount + 1 }
-                : post
-
-                
+                : post   
             )
           );
-        }
-      } catch (error) {}
+
+          setLikedPosts((prevState)=>{
+            return { ...prevState, [postID]: true }
+          })
+        
+
+      }else{
+        console.log('inside else', likedPosts);
+
+
+        setFeedPosts((prevFeedPosts) =>
+            prevFeedPosts.map((post) =>
+              post._id === postID
+                ? { ...post, likeCount: post.likeCount - 1 }
+                : post   
+            )
+          );
+          setLikedPosts((prevState)=>{
+            const newState = { ...prevState };
+            delete newState[postID]; // Remove the post from likedPosts
+            return newState;
+          });
+          console.log('after setting', likedPosts);
+      }
+      // try {
+      //   const res = await upVotePostApi(postID);
+      //   console.log(res);
+      //   if (res.status) {
+      //     setFeedPosts((prevFeedPosts) =>
+      //       prevFeedPosts.map((post) =>
+      //         post._id === postID
+      //           ? { ...post, likeCount: post.likeCount + 1 }
+      //           : post   
+      //       )
+      //     );
+      //   }
+      // } catch (error) {}
     } else {
       setShowLoginDialog(true);
     }
@@ -113,7 +154,7 @@ const FeedMid = () => {
           </section>
         )}
 
-        <section className="feed-posts">
+        {isFeedLoading ? <CircularProgress sx={{margin:'0 auto'}}/> :<section className="feed-posts">
           {feedPosts.map((feedPost) => (
             <FeedPost
               key={feedPost._id}
@@ -122,7 +163,7 @@ const FeedMid = () => {
               handleComment={handleComment}
             />
           ))}
-        </section>
+        </section>}
       </div>
       <LoginDialog open={showLoginDialog} setOpen={setShowLoginDialog} />
     </div>

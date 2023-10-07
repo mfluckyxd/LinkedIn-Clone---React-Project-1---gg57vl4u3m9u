@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../../assets/styles/userProfile.css";
 import { Avatar, Button } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router";
+import { getUserInfo } from "../../../utils/apis/getUserInfo";
 
 
 const UserProfile = () => {
   const userName = sessionStorage.getItem("userName");
+  const userId = sessionStorage.getItem("userId");
   const navigate = useNavigate()
+  // useEffect(()=>{
+  //   getUserInfo(userId)
+  // },[])
 
   return (
     <div className="profile-main-container">

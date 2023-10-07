@@ -18,7 +18,7 @@ const FeedLeft = () => {
             />
 
             <Avatar sx={{ width: 60, height: 60, marginTop: "-30px" }} />
-            <h3>Welcome, {userName}</h3>
+            <h3><Link to={'/profile'}>Welcome, {userName}</Link></h3>
             <section className="skills">
               <span>React</span>
               <span>JAVASCRIPT</span>
@@ -32,14 +32,14 @@ const FeedLeft = () => {
 
           <Divider />
           <section className="profile-stats">
-            <Link>
+            <Link to={'/premium'}>
               <div className="profile-stats-view">
                 <span>Who viewed your profile</span>
                 <span className="profile-view-state">39</span>
               </div>
             </Link>
 
-            <Link>
+            <Link to={'/mynetwork'}>
               <div className="profile-stats-network">
                 <span>
                   Connections <br />

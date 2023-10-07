@@ -183,7 +183,7 @@ const Signup = () => {
           </p>
           {signUpError && (
             <Alert variant="outlined" severity="error">
-              {signUpError}, Please try again later
+              Something went wrong, Please try again later
             </Alert>
           )}
           <Button

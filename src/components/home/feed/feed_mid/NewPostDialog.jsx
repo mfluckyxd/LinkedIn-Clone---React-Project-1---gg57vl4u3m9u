@@ -3,11 +3,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import "../../../../assets/styles/newPostDialog.css";
 import React, { useRef, useState } from "react";
-
+import { composeNewpost } from "../../../../utils/apis/userActionAPIs";
+import { v4 as uuidv4 } from 'uuid';
 
 const NewPostDialog = ({ open, setOpen, setFeedPosts }) => {
   const userName = sessionStorage.getItem("userName");
-  
+
   const fileInputRef = useRef(null);
 
   const [userInputs, setuserInputs] = useState({
@@ -15,15 +16,17 @@ const NewPostDialog = ({ open, setOpen, setFeedPosts }) => {
     content: "",
   });
 
-
   const handleSubmit = () => {
-
-    const newPost = {
+    const postid = uuidv4();
+    if (userInputs.content) {
+          const newPost = {
       author: {
         name: userName,
       },
       content: userInputs.content,
       channel: { image: userInputs.imageSrc },
+      likeCount: 3,
+      _id:postid
     };
   
     setFeedPosts((prevFeedPosts) => [newPost, ...prevFeedPosts]);
@@ -32,6 +35,9 @@ const NewPostDialog = ({ open, setOpen, setFeedPosts }) => {
       imageSrc: "",
       content: "",
     });
+
+    }
+
 
     setOpen(false);
   };
@@ -58,8 +64,6 @@ const NewPostDialog = ({ open, setOpen, setFeedPosts }) => {
       ...prevData,
       content: value,
     }));
-    console.log(userInputs);
-
   };
   const handleClose = () => {
     setOpen(false);
@@ -95,6 +99,7 @@ const NewPostDialog = ({ open, setOpen, setFeedPosts }) => {
                 rows={"6"}
                 placeholder="What do you want to talk about?"
                 onChange={saveUserContent}
+                
               ></textarea>
             </div>
             <div>

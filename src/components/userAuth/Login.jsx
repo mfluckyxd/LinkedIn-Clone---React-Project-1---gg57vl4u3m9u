@@ -124,7 +124,7 @@ const Login = () => {
           <br />
           {signInError && (
             <Alert sx={{marginTop:'2rem', width:'65%'}} variant="outlined" severity="error">
-              {signInError}, Please try again later
+              Something went wrong, Please try again later
             </Alert>
           )}
           <Button

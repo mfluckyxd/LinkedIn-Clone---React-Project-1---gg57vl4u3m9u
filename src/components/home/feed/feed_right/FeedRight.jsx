@@ -1,7 +1,7 @@
 import React from "react";
 import "../../../../assets/styles/feedRight.css";
 import { IconButton, Tooltip } from "@mui/material";
-import ErrorIcon from "@mui/icons-material/Error";
+import InfoIcon from '@mui/icons-material/Info';
 import { Link } from "react-router-dom";
 
 const FeedRight = () => {
@@ -13,7 +13,7 @@ const FeedRight = () => {
             <h4>LinkedIn News</h4>
             <Tooltip title="These are the day’s top professional news stories and conversations.">
               <IconButton >
-                <ErrorIcon />
+                <InfoIcon />
               </IconButton>
             </Tooltip>
           </div>

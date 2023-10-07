@@ -1,7 +1,7 @@
 const projectID = "gg57vl4u3m9u";
 const authToken = sessionStorage.getItem("authToken");
 
-console.log('while fetching', authToken);
+
 export const authHeader = () => {
   return {
     headers: {
@@ -10,7 +10,6 @@ export const authHeader = () => {
     },
   };
 };
-
 export const headerWithProjectIdOnly = () => {
   return {
     headers: {
@@ -20,6 +19,7 @@ export const headerWithProjectIdOnly = () => {
 };
 
 export const headerWithJWT = ()=>{
+  // console.log('while fetching', authToken);
   return {
     headers:{
       Authorization: `Bearer ${authToken}`,
