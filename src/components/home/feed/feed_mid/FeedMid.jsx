@@ -17,14 +17,13 @@ const FeedMid = () => {
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
 
-
   const [showNewPostDialog, setShowNewPostDialog] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleNewPostDialog = ()=>{
-    setShowNewPostDialog(true)
-  }
+  const handleNewPostDialog = () => {
+    setShowNewPostDialog(true);
+  };
 
   const fetchPosts = async () => {
     try {
@@ -39,10 +38,21 @@ const FeedMid = () => {
 
   const handleUpVote = async (postID) => {
     if (isLoggedIn) {
-      // try {
-      //   const res = await upVotePostApi(postID);
-      //   console.log(res);
-      // } catch (error) {}
+      try {
+        const res = await upVotePostApi(postID);
+        console.log(res);
+        if (res.status) {
+          setFeedPosts((prevFeedPosts) =>
+            prevFeedPosts.map((post) =>
+              post._id === postID
+                ? { ...post, likeCount: post.likeCount + 1 }
+                : post
+
+                
+            )
+          );
+        }
+      } catch (error) {}
     } else {
       setShowLoginDialog(true);
     }
@@ -63,10 +73,12 @@ const FeedMid = () => {
         {isLoggedIn && (
           <section className="new-post">
             <div className="new-post-form">
-              <Avatar sx={{ height: 60, width: 60, cursor:'pointer' }} onClick={()=>navigate('/profile')}/>
+              <Avatar
+                sx={{ height: 60, width: 60, cursor: "pointer" }}
+                onClick={() => navigate("/profile")}
+              />
               <input
-
-              onClick={handleNewPostDialog}
+                onClick={handleNewPostDialog}
                 type="text"
                 name="text"
                 id="newPost"
@@ -93,7 +105,11 @@ const FeedMid = () => {
                 <span>Article</span>
               </button>
             </div>
-            <NewPostDialog open={showNewPostDialog} setOpen={setShowNewPostDialog} setFeedPosts={setFeedPosts}/>
+            <NewPostDialog
+              open={showNewPostDialog}
+              setOpen={setShowNewPostDialog}
+              setFeedPosts={setFeedPosts}
+            />
           </section>
         )}
 

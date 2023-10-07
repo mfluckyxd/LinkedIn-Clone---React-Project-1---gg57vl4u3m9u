@@ -85,6 +85,7 @@
     padding: 0.7rem;
     border-radius: 15px;
     cursor: pointer;
+    
 }
 .post-feature button:hover{
     background-color: #cecaca;
@@ -113,4 +114,8 @@
 .about-user p{
     font-size: 0.7rem;
     margin: 0;
+}
+
+.liked-post{
+    color: rgb(50, 50, 228) !important;
 }

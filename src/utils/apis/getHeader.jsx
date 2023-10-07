@@ -1,7 +1,7 @@
 const projectID = "gg57vl4u3m9u";
-const authToken = JSON.parse(sessionStorage.getItem("authToken"));
+const authToken = sessionStorage.getItem("authToken");
 
-console.log(authToken);
+console.log('while fetching', authToken);
 export const authHeader = () => {
   return {
     headers: {

@@ -32,8 +32,8 @@ export const signInApi = async (userInfo)=>{
             headers
           );
           
-          
-          sessionStorage.setItem("authToken", JSON.stringify(res.data.token));
+          console.log('while saving' ,res.data.token);
+          sessionStorage.setItem("authToken", res.data.token);
           sessionStorage.setItem("userName", res.data.data.name);
           sessionStorage.setItem("loginStatus", JSON.stringify(true));
           

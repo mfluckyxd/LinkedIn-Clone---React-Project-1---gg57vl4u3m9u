@@ -7,6 +7,8 @@ import SendIcon from "@mui/icons-material/Send";
 import React from "react";
 
 const FeedPost = ({ feedPost, handleUpVote, handleComment }) => {
+
+  
   return (
     <div className="feedpost-grid-container">
       <section className="post-header">
@@ -20,7 +22,7 @@ const FeedPost = ({ feedPost, handleUpVote, handleComment }) => {
           </div>
           <div className="about-user">
             <h4>{feedPost.author.name}</h4>
-            <p>{feedPost.channel.name||'Software Devloper'}</p>
+            <p>{feedPost.channel.name || "Software Devloper"}</p>
           </div>
         </div>
         <div className="header-right">
@@ -32,12 +34,18 @@ const FeedPost = ({ feedPost, handleUpVote, handleComment }) => {
         <img src={feedPost.channel.image} alt="" />
       </section>
 
-      <section id={feedPost._id||''} className="post-feature">
+      <section id={feedPost._id || ""} className="post-feature">
         <button
           onClick={() => handleUpVote(feedPost._id)}
           className="post-like"
+          
         >
-          <ThumbUpOffAltIcon /> <span>Like</span>
+          <ThumbUpOffAltIcon  /> <span>Like</span>{" "}
+          {feedPost.likeCount !==0 && (
+            <span style={{ marginLeft: "0.5rem", fontWeight: "bold" }}>
+              {feedPost.likeCount}
+            </span>
+          )}
         </button>
         <button onClick={handleComment} className="post-comment">
           <ChatBubbleOutlineIcon />
