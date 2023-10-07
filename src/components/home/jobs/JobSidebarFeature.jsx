@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const JobSidebarFeature = ({Icon, title}) => {
   return (
-    <Link className='job-sidebar-feature'>
+    <Link to={'/unavailable'} className='job-sidebar-feature'>
         <Icon/>
         <span>{title}</span>
     </Link>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const SidebarFeature = ({ Icon, title, state }) => {
   return (
     <>
-      <Link>
+      <Link  to={'/unavailable'}>
         <div className="sidebar-feature-left">
           <Icon />
           <p>{title}</p>

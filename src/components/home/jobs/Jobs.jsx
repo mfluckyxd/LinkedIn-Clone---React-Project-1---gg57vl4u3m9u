@@ -34,17 +34,17 @@ const Jobs = () => {
         <div className="recent-jobs-container">
             <h3>Recent Jobs</h3>
             <div className="recent-jobs">
-                <Link>
+                <Link  to={'/unavailable'}>
                     <span className="recent-job-title">React devloper</span>
                     <span className="recent-job-type"><span>Noida</span></span>
                 </Link>
                 <Divider/>
-                <Link>
+                <Link to={'/unavailable'}>
                     <span className="recent-job-title">Frontend devloper</span>
                     <span className="recent-job-type"><span>Remote</span></span>
                 </Link>
                 <Divider/>
-                <Link>
+                <Link to={'/unavailable'}>
                     <span className="recent-job-title">Backend devloper</span>
                     <span className="recent-job-type"><span>Pune</span></span>
                 </Link>

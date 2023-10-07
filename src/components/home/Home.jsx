@@ -8,6 +8,7 @@ import Jobs from "./jobs/Jobs";
 import UserProfile from "./UserProfile.jsx/UserProfile";
 import Notification from "./notification/Notification";
 import Premium from "./premium/Premium";
+import FeatureUnavailable from "../Errors/FeatureUnavailable";
 
 const Home = () => {
   return (
@@ -20,11 +21,12 @@ const Home = () => {
       <Route path="/" element={<Feed/>} />
         <Route path="/mynetwork" element={<ProtectedRoute Component={<MyNetwork/>}/>}/>
         <Route path="/jobs" element={<Jobs/>}/>
-        <Route path="/messages" element={<ProtectedRoute Component={<div>msg section</div>}/>}/>
+        <Route path="/messages" element={<ProtectedRoute Component={<FeatureUnavailable/>}/>}/>
         <Route path="/notifications" element={<ProtectedRoute Component={<Notification/>}/>}/>
-        <Route path="/business" element={<div>business section</div>}/>
+        <Route path="/business" element={<FeatureUnavailable/>}/>
         <Route path='/profile' element={<ProtectedRoute Component={<UserProfile/>}/>}/>
         <Route path='/premium' element={<Premium/>}/>
+        <Route path='/unavailable' element={<FeatureUnavailable/>}/>
         
       </Routes>
       </div>

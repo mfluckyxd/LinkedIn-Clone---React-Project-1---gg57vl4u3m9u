@@ -7,7 +7,7 @@ const SingleNoti = ({image, content, time}) => {
   return (
     <div className='single-notification'>
         <Avatar sx={{width:60, height:60}} src={image}/>
-        <Link>{content}</Link>
+        <Link to={'/unavailable'}>{content}</Link>
         <div><span>{time}</span><MoreHorizIcon/> </div>
 
     </div>

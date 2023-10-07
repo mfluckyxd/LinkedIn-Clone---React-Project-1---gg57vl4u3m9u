@@ -53,11 +53,11 @@ const FeedLeft = () => {
 
         <div className="feed-left-recent">
           <h4>Recent</h4>
-          <Link>#Javascript</Link>
-          <Link>#React</Link>
-          <Link>#Node.Js</Link>
-          <Link>#DSA</Link>
-          <Link>#Softwar_Engineer</Link>
+          <Link to={'/unavailable'}>#Javascript</Link>
+          <Link to={'/unavailable'}>#React</Link>
+          <Link to={'/unavailable'}>#Node.Js</Link>
+          <Link to={'/unavailable'}>#DSA</Link>
+          <Link to={'/unavailable'}>#Softwar_Engineer</Link>
         </div>
       </div>
     </div>

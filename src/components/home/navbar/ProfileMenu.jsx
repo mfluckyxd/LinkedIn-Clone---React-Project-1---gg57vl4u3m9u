@@ -12,6 +12,7 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import "../../../assets/styles/profileMenu.css";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const ProfileMenu = () => {
     const navigate = useNavigate();
@@ -110,14 +111,14 @@ const ProfileMenu = () => {
             <Divider />
             <Typography variant="subtitle1">Accounts</Typography>
             <MenuItem onClick={()=>{handleClose();navigate('/premium')}} >Try premium for free.</MenuItem>
-            <MenuItem>Settings & Privacy</MenuItem>
-            <MenuItem>Help</MenuItem>
-            <MenuItem>Languages</MenuItem>
+            <MenuItem onClick={()=>{handleClose();navigate('/unavailable')}}>Settings & Privacy</MenuItem>
+            <MenuItem onClick={()=>{handleClose();navigate('/unavailable')}}>Help</MenuItem>
+            <MenuItem onClick={()=>{handleClose();navigate('/unavailable')}}>Languages</MenuItem>
 
             <Divider />
             <Typography variant="subtitle1">Manage</Typography>
-            <MenuItem>Post & Activityt</MenuItem>
-            <MenuItem>Job Posting Accoun</MenuItem>
+            <MenuItem onClick={()=>{handleClose();navigate('/unavailable')}}>Post & Activityt</MenuItem>
+            <MenuItem onClick={()=>{handleClose();navigate('/unavailable')}}>Job Posting Accoun</MenuItem>
             <Divider/>
             <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
           </>
