@@ -76,13 +76,16 @@
     grid-row: 4;
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid #6666666e;
+    border-bottom: 1px solid #6666666e;
 }
 .post-feature button{
     border: none;
     background-color: transparent;
     display: flex;
     align-items: center;
-    padding: 0.7rem;
+    margin: 0.4rem;
+    padding: 0.3rem;
     border-radius: 15px;
     cursor: pointer;
     
@@ -119,4 +122,49 @@
 .liked-post{
     color: rgb(50, 50, 228) !important;
 }
+
+.post-comments-section{
+    display: flex;
+    flex-direction: column;
+    margin:1rem 0;
+    gap: 0.7rem;
+}
+.post-comment-content{
+    display: flex;
+    flex-direction: column;
+    background-color: #F4F2EE;
+    border-radius: 3px 10px 10px 10px;
+    padding: 0.5rem;
+    width: 100%;
+}
+.post-comment-content h4{
+    margin: 0;
+    font-weight: 500;
+}
+.post-comment-content p{
+    /* font-size: 0.7rem; */
+    margin: 0;
+}
+.post-comment{
+    display: flex;
+    gap: 0.8rem;
+}
+.compose-comment{
+    display: flex;
+    gap: 0.8rem;
+}
+.compose-comment input{
+    width: 100%;
+    border-radius: 25px;
+    border: 1px solid #666666;
+    padding: 0 0.7rem;
+    
+}
+.compose-comment button{
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+
 

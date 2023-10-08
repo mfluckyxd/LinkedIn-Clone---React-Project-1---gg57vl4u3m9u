@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
 import Feed from "./feed/Feed";
 import ProtectedRoute from "./ProtectedRoute";
@@ -27,6 +27,7 @@ const Home = () => {
         <Route path='/profile' element={<ProtectedRoute Component={<UserProfile/>}/>}/>
         <Route path='/premium' element={<Premium/>}/>
         <Route path='/unavailable' element={<FeatureUnavailable/>}/>
+        <Route path='*' element={<Navigate to={'/'}/>}/>
         
       </Routes>
       </div>

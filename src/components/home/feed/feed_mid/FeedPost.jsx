@@ -1,14 +1,139 @@
-import { Avatar, Divider } from "@mui/material";
+import { Avatar, Divider, Snackbar } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import SendIcon from "@mui/icons-material/Send";
 
-import React from "react";
+import React, { useState } from "react";
+import SingleComments from "./SingleComments";
+import UnavailableDialog from "../../../Errors/UnavailableDialog";
 
-const FeedPost = ({ feedPost, handleUpVote, handleComment }) => {
+const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
+  const userName = sessionStorage.getItem("userName");
+  const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
 
-  
+  const [showComments, setShowComments] = useState();
+
+  const [showShareDialog, setShowShareDialog] = useState(false);
+
+  const [likedPosts, setLikedPosts] = useState({});
+  const [postComments, setPostComments] = useState([
+    {
+      name: "Paul David",
+      comment:
+        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered.",
+    },
+    {
+      name: "Jon Alex",
+      comment:
+        "If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrassing hidden in the middle of text.",
+    },
+    {
+      name: "Brian David",
+      comment:
+        "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
+    },
+    {
+      name: "Moosa Alexender",
+      comment:
+        "It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.",
+    },
+  ]);
+  const [userCommentinput, setUserCommentInput] = useState({
+    name: "",
+    comment: "",
+  });
+
+  const handleUpVote = async (postID) => {
+    if (isLoggedIn) {
+      if (!likedPosts[postID]) {
+        console.log(postID);
+        console.log("inside if", likedPosts);
+        setFeedPosts((prevFeedPosts) =>
+          prevFeedPosts.map((post) =>
+            post._id === postID
+              ? { ...post, likeCount: post.likeCount + 1 }
+              : post
+          )
+        );
+
+        setLikedPosts((prevState) => {
+          return { ...prevState, [postID]: true };
+        });
+      } else {
+        console.log("inside else", likedPosts);
+
+        setFeedPosts((prevFeedPosts) =>
+          prevFeedPosts.map((post) =>
+            post._id === postID
+              ? { ...post, likeCount: post.likeCount - 1 }
+              : post
+          )
+        );
+        setLikedPosts((prevState) => {
+          const newState = { ...prevState };
+          delete newState[postID]; // Remove the post from likedPosts
+          return newState;
+        });
+        console.log("after setting", likedPosts);
+      }
+      // try {
+      //   const res = await upVotePostApi(postID);
+      //   console.log(res);
+      //   if (res.status) {
+      //     setFeedPosts((prevFeedPosts) =>
+      //       prevFeedPosts.map((post) =>
+      //         post._id === postID
+      //           ? { ...post, likeCount: post.likeCount + 1 }
+      //           : post
+      //       )
+      //     );
+      //   }
+      // } catch (error) {}
+    } else {
+      setShowLoginDialog(true);
+    }
+  };
+
+  const saveUserComment = (e) => {
+    const { value } = e.target;
+    setUserCommentInput({
+      name: userName,
+      comment: value,
+    });
+  };
+
+  const handleNewComment = (postID) => {
+    if (userCommentinput.comment) {
+      setPostComments((prevState) => [userCommentinput, ...prevState]);
+    }
+    setUserCommentInput({
+      name: "",
+      comment: "",
+    });
+  };
+
+  const handleShowComment = () => {
+    if (isLoggedIn) {
+      if (showComments) {
+        setShowComments(false);
+      } else {
+        setShowComments(true);
+      }
+    } else {
+      setShowLoginDialog(true);
+    }
+  };
+
+  const handleShare = () => {
+    if (isLoggedIn) {
+      setShowShareDialog(true);
+    } else {
+      setShowLoginDialog(true)
+    }
+    
+  };
+
   return (
     <div className="feedpost-grid-container">
       <section className="post-header">
@@ -38,24 +163,54 @@ const FeedPost = ({ feedPost, handleUpVote, handleComment }) => {
         <button
           onClick={() => handleUpVote(feedPost._id)}
           className="post-like"
-          
         >
-          <ThumbUpOffAltIcon  /> <span>Like</span>{" "}
-          {feedPost.likeCount !==0 && (
+          <ThumbUpOffAltIcon /> <span>Like</span>{" "}
+          {feedPost.likeCount !== 0 && (
             <span style={{ marginLeft: "0.5rem", fontWeight: "bold" }}>
               {feedPost.likeCount}
             </span>
           )}
         </button>
-        <button onClick={handleComment} className="post-comment">
+        <button onClick={handleShowComment} className="post-comment">
           <ChatBubbleOutlineIcon />
           <span>Comment</span>
         </button>
-        <button className="post-share">
+        <button onClick={handleShare} className="post-share">
           <SendIcon />
-          <span>Share</span>
+          <span>Share
+            
+          </span>
         </button>
+        
       </section>
+      {showComments && (
+        <section className="post-comments-section">
+          <div className="compose-comment">
+            <Avatar />
+            <input
+              type="text"
+              value={userCommentinput.comment}
+              onChange={saveUserComment}
+            />
+            <button onClick={handleNewComment}>
+              <SendIcon />
+            </button>
+          </div>
+          {postComments.map((comment, index) => {
+            return <SingleComments key={index} comment={comment} />;
+          })}
+
+          {/* <div className="post-comment">
+          <Avatar/>
+            <div className="post-comment-content">
+              <h4>Paul Janson</h4>
+              <p>This is a sample comment</p>
+            </div>
+        </div> */}
+        </section>
+      )}
+
+      <UnavailableDialog open={showShareDialog} setOpen={setShowShareDialog}/>
     </div>
   );
 };

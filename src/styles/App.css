@@ -19,3 +19,11 @@ body{
     justify-content: center;
     margin-top: 10vh;
 }
+
+.unavailable-alert-dialog{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
