@@ -143,8 +143,9 @@
     font-weight: 500;
 }
 .post-comment-content p{
-    /* font-size: 0.7rem; */
+    font-size: 0.9rem;
     margin: 0;
+    font-weight: 380;
 }
 .post-comment{
     display: flex;
