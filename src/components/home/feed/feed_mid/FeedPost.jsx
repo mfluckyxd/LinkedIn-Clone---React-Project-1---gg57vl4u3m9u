@@ -14,7 +14,7 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
 
   const [showComments, setShowComments] = useState();
 
-  const [showShareDialog, setShowShareDialog] = useState(false);
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
 
   const [likedPosts, setLikedPosts] = useState({});
   const [postComments, setPostComments] = useState([
@@ -127,7 +127,7 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
 
   const handleShare = () => {
     if (isLoggedIn) {
-      setShowShareDialog(true);
+      setShowErrorDialog(true);
     } else {
       setShowLoginDialog(true)
     }
@@ -197,7 +197,7 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
             </button>
           </div>
           {postComments.map((comment, index) => {
-            return <SingleComments key={index} comment={comment} />;
+            return <SingleComments key={index} comment={comment} setShowErrorDialog={setShowErrorDialog} />;
           })}
 
           {/* <div className="post-comment">
@@ -210,7 +210,7 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
         </section>
       )}
 
-      <UnavailableDialog open={showShareDialog} setOpen={setShowShareDialog}/>
+      <UnavailableDialog open={showErrorDialog} setOpen={setShowErrorDialog}/>
     </div>
   );
 };

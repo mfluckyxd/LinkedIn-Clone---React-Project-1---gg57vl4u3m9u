@@ -1,19 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../assets/styles/userProfile.css";
 import { Avatar, Button } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router";
 import { getUserInfo } from "../../../utils/apis/getUserInfo";
-
+import UnavailableDialog from "../../Errors/UnavailableDialog";
 
 const UserProfile = () => {
   const userName = sessionStorage.getItem("userName");
   const userId = sessionStorage.getItem("userId");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // useEffect(()=>{
   //   getUserInfo(userId)
   // },[])
+
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
 
   return (
     <div className="profile-main-container">
@@ -43,15 +45,16 @@ const UserProfile = () => {
               <Button
                 variant="contained"
                 sx={{ borderRadius: "25px", height: "1.6rem" }}
+                onClick={() => setShowErrorDialog(true)}
               >
-                <PersonAddIcon />
-                Connect
+                I am...
               </Button>
               <Button
                 variant="outlined"
                 sx={{ borderRadius: "25px", height: "1.6rem" }}
+                onClick={() => setShowErrorDialog(true)}
               >
-                Message
+                Edit profile
               </Button>
               <Button
                 variant="outlined"
@@ -61,6 +64,7 @@ const UserProfile = () => {
                   borderRadius: "25px",
                   height: "1.6rem",
                 }}
+                onClick={() => setShowErrorDialog(true)}
               >
                 More
               </Button>
@@ -83,14 +87,47 @@ const UserProfile = () => {
         </section>
         <section className="profile-right">
           <div className="premium-section">
-            <div className="ad-icon"><span>Ad</span><MoreHorizIcon /></div>
-            <div style={{textAlign:'center', fontSize:'0.86rem', margin:'1rem'}}>{userName}, boost your job search with premium</div>
-            <div className="avatar-icons"><Avatar sx={{backgroundColor:'#095faa'}}>R</Avatar><Avatar sx={{backgroundColor:'#aa0941'}}>KL</Avatar></div>
-            <div style={{textAlign:'center', fontSize:'0.86rem', margin:'1rem'}}>See who's viewed your profile in last 90 days</div>
-            <div><Button onClick={()=>{navigate('/premium')}} variant="outlined" sx={{borderRadius:'25px'}}>Try for FREE</Button></div>
+            <div className="ad-icon">
+              <span>Ad</span>
+              <MoreHorizIcon />
+            </div>
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "0.86rem",
+                margin: "1rem",
+              }}
+            >
+              {userName}, boost your job search with premium
+            </div>
+            <div className="avatar-icons">
+              <Avatar sx={{ backgroundColor: "#095faa" }}>R</Avatar>
+              <Avatar sx={{ backgroundColor: "#aa0941" }}>KL</Avatar>
+            </div>
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "0.86rem",
+                margin: "1rem",
+              }}
+            >
+              See who's viewed your profile in last 90 days
+            </div>
+            <div>
+              <Button
+                onClick={() => {
+                  navigate("/premium");
+                }}
+                variant="outlined"
+                sx={{ borderRadius: "25px" }}
+              >
+                Try for FREE
+              </Button>
+            </div>
           </div>
         </section>
       </div>
+      <UnavailableDialog open={showErrorDialog} setOpen={setShowErrorDialog} />
     </div>
   );
 };

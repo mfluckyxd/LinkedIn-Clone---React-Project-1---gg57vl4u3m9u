@@ -135,7 +135,8 @@
     background-color: #F4F2EE;
     border-radius: 3px 10px 10px 10px;
     padding: 0.5rem;
-    width: 100%;
+    /* margin-right: 1rem; */
+    /* width: 100%; */
 }
 .post-comment-content h4{
     margin: 0;
@@ -149,6 +150,17 @@
     display: flex;
     gap: 0.8rem;
 }
+
+.post-comment button{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+.post-comment button:hover{
+    text-decoration: underline;
+    color: black;
+}
+
 .compose-comment{
     display: flex;
     gap: 0.8rem;
