@@ -1,7 +1,15 @@
 import React from "react";
 import { ReactComponent as LinkedinLogo } from "../../assets/img/linkedinLogo.svg";
 import "../../assets/styles/login.css";
-import { TextField, Button, Divider, Chip, CircularProgress, Alert } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Divider,
+  Chip,
+  CircularProgress,
+  Alert,
+  Snackbar,
+} from "@mui/material";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { signInApi } from "../../utils/apis/authAPIs";
@@ -18,7 +26,9 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState();
   const [signInError, setSignError] = useState();
 
-  const [signInLoader, setSignInLoader] = useState(false)
+  const [signInLoader, setSignInLoader] = useState(false);
+
+  
 
   const navigate = useNavigate();
 
@@ -44,27 +54,30 @@ const Login = () => {
     return emailRegex.test(email);
   };
 
-  const handleLogin =async (e)=>{
-    e.preventDefault()
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
-      setSignInLoader(true)
+      setSignInLoader(true);
       const res = await signInApi(userInfo);
       if (res.status) {
-        navigate("/")
-      }else{
-        setSignError(res.error)
+        
+        navigate("/");
+      } else {
+        setSignError(res.error);
       }
     } catch (error) {
-      setSignError(error.message)
-    }finally{
-      setSignInLoader(false)
+      setSignError(error.message);
+    } finally {
+      setSignInLoader(false);
     }
-  }
+  };
 
   return (
     <div>
-      <Link to='/'><LinkedinLogo /></Link>
-      
+      <Link to="/">
+        <LinkedinLogo />
+      </Link>
+
       <div className="login-container">
         <section className="form-container">
           <h3 className="login-heading">
@@ -123,7 +136,11 @@ const Login = () => {
 
           <br />
           {signInError && (
-            <Alert sx={{marginTop:'2rem', width:'65%'}} variant="outlined" severity="error">
+            <Alert
+              sx={{ marginTop: "2rem", width: "65%" }}
+              variant="outlined"
+              severity="error"
+            >
               Something went wrong, Please try again later
             </Alert>
           )}
@@ -134,7 +151,7 @@ const Login = () => {
             onClick={handleLogin}
             disabled={signInLoader}
           >
-           {signInLoader ? <CircularProgress size={20} /> : "SignIn"}
+            {signInLoader ? <CircularProgress size={20} /> : "SignIn"}
           </Button>
 
           <Divider sx={{ width: "70%", marginTop: "2rem" }}>
@@ -162,6 +179,7 @@ const Login = () => {
           />
         </section>
       </div>
+      
     </div>
   );
 };
