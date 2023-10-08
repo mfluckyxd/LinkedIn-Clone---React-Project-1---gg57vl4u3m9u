@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../../assets/styles/userProfile.css";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, Divider } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router";
@@ -83,6 +83,31 @@ const UserProfile = () => {
               tend to repeat predefined chunks as necessary, making this the
               first true generator on the Internet.
             </p>
+          </div>
+          <div className="user-education">
+            <h4>Education</h4>
+            <Divider />
+            <div className="edu-details">
+              <Avatar sx={{height:'60px', width:'60px'}} src="https://media.istockphoto.com/id/876177980/vector/university-vector.jpg?s=2048x2048&w=is&k=20&c=P74kJA80i12oez5l6YcunRlZg_MNYqO3XGIErmLJMP0=" />
+              <div className="uni-info">
+                <h3>
+                  Bharati Vidyapeeth University College Of Engineering, Pune
+                </h3>
+                <p>Bachelor of Technology - B.Tech</p>
+                <span>Jul 2018 - Jul 2022</span>
+              </div>
+            </div>
+          </div>
+          <div className="user-skills">
+            <h4>Skills</h4>
+            <Divider/>
+            <div className="skills-section">
+              <p>React</p>
+              <p>Material Ui</p>
+              <p>Javascript</p>
+              <p>CSS</p>
+              
+            </div>
           </div>
         </section>
         <section className="profile-right">
