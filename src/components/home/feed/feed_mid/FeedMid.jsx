@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../../../assets/styles/feedMid.css";
-import { Avatar, CircularProgress, Snackbar } from "@mui/material";
+import { Avatar, CircularProgress, Divider, Snackbar } from "@mui/material";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import ArticleIcon from "@mui/icons-material/Article";
 import EventIcon from "@mui/icons-material/Event";
@@ -35,10 +35,13 @@ const FeedMid = () => {
 
   const fetchPosts = async () => {
     try {
-      setIsFeedLoading(true)
+      if (pageNo===1) {
+        setIsFeedLoading(true)
+        
+      }
       const res = await getPosts(pageNo);
       if (res.success) {
-        setFeedPosts(res.data);
+        setFeedPosts(prevFeedPosts => [...prevFeedPosts, ...res.data]);
       }
     } catch (error) {
       console.log(error);
@@ -47,10 +50,23 @@ const FeedMid = () => {
     }
   };
 
-
+  const handleScroll = ()=>{
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.offsetHeight - 100
+    ) {
+      setPageNo((prevPage) => prevPage + 1);
+    }
+  }
 
   useEffect(() => {
     fetchPosts();
+  }, [pageNo]);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
   return (
     <div className="feed-mid-container">
@@ -98,14 +114,18 @@ const FeedMid = () => {
           </section>
         )}
 
-        {isFeedLoading ? <CircularProgress sx={{margin:'0 auto'}}/> :<section className="feed-posts">
+        {isFeedLoading ? <Divider><CircularProgress sx={{margin:'0 auto'}}/></Divider>:<section className="feed-posts"> 
+
           {feedPosts.map((feedPost) => (
+            <>
             <FeedPost
               key={feedPost._id}
               feedPost={feedPost}
               setFeedPosts={setFeedPosts}
               setShowLoginDialog={setShowLoginDialog}
             />
+              
+            </>
           ))}
         </section>}
       </div>
