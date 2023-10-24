@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../../assets/styles/userProfile.css";
 import { Avatar, Button, Divider } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -11,11 +11,24 @@ const UserProfile = () => {
   const userName = sessionStorage.getItem("userName");
   const userId = sessionStorage.getItem("userId");
   const navigate = useNavigate();
+
+  const fileInputRef = useRef(null);
+  const [profileImg, setProfileImg] = useState(false);
+
   // useEffect(()=>{
   //   getUserInfo(userId)
   // },[])
 
   const [showErrorDialog, setShowErrorDialog] = useState(false);
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      // setImageSrc(imageUrl);
+      setProfileImg(imageUrl);
+    }
+  };
 
   return (
     <div className="profile-main-container">
@@ -26,14 +39,27 @@ const UserProfile = () => {
               src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAkq1F1Jv91R3CKq4KVcKHMaTIBKGbsWWGpDWPbol2TeCemoCd6utLcZIvw93qW7epAB_oDursXeka8_FaLzN87TPDmJn_ZvugL4LQ8zC2fOl3vBlB5cjhvS8Tspn7JPdbZkI8_WXlp9xsGcb7I2kjiEbu6UQmUGBQOacgpPFHEK3HIbQOpJ8d9ZXp3A/s16000/Linkedin%20Cover%20Photo%201.jpg"
               alt="profile-cover"
             />
-            <Avatar
+            {profileImg ? (
+              <Avatar
+                sx={{
+                  width: 150,
+                  height: 150,
+                  marginTop: "-90px",
+                  marginLeft: "30px",
+                }}
+              >
+                <img src={profileImg} alt="your-dp" />
+              </Avatar>
+            ):<Avatar
               sx={{
                 width: 150,
                 height: 150,
                 marginTop: "-90px",
                 marginLeft: "30px",
               }}
-            />
+            />}
+            
+
             <h4 className="user-title">{userName}</h4>
             <p className="user-summary">
               It is a long established fact that a reader will be distracted by
@@ -52,9 +78,16 @@ const UserProfile = () => {
               <Button
                 variant="outlined"
                 sx={{ borderRadius: "25px", height: "1.6rem" }}
-                onClick={() => setShowErrorDialog(true)}
+                onClick={() => fileInputRef.current.click()}
               >
                 Edit profile
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
+                  onChange={handleFileSelect}
+                />
               </Button>
               <Button
                 variant="outlined"
@@ -88,7 +121,10 @@ const UserProfile = () => {
             <h4>Education</h4>
             <Divider />
             <div className="edu-details">
-              <Avatar sx={{height:'60px', width:'60px'}} src="https://media.istockphoto.com/id/876177980/vector/university-vector.jpg?s=2048x2048&w=is&k=20&c=P74kJA80i12oez5l6YcunRlZg_MNYqO3XGIErmLJMP0=" />
+              <Avatar
+                sx={{ height: "60px", width: "60px" }}
+                src="https://media.istockphoto.com/id/876177980/vector/university-vector.jpg?s=2048x2048&w=is&k=20&c=P74kJA80i12oez5l6YcunRlZg_MNYqO3XGIErmLJMP0="
+              />
               <div className="uni-info">
                 <h3>
                   Bharati Vidyapeeth University College Of Engineering, Pune
@@ -100,13 +136,12 @@ const UserProfile = () => {
           </div>
           <div className="user-skills">
             <h4>Skills</h4>
-            <Divider/>
+            <Divider />
             <div className="skills-section">
               <p>React</p>
               <p>Material Ui</p>
               <p>Javascript</p>
               <p>CSS</p>
-              
             </div>
           </div>
         </section>
