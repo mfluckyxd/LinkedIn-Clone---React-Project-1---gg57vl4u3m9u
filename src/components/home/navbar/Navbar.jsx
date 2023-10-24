@@ -10,13 +10,17 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
 import NavFeature from "./NavFeature";
 import ProfileMenu from "./ProfileMenu";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import LoginDialog from "../../userAuth/LoginDialog";
+import { useSearch } from "../../../SearchContext";
 
 const Navbar = () => {
 
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
   const [showLoginDialog, setShowLoginDialog] = useState(false)
+
+  const {updateSearch,updatePageNo} = useSearch()
+  const navigate = useNavigate()
 
   const searchBarRef = useRef(null)
   const focusSearchBar = ()=>{
@@ -28,9 +32,15 @@ const Navbar = () => {
   const handleNavClick = (e)=>{
     if (!isLoggedIn) {
       e.preventDefault();
-      setShowLoginDialog(true);
+      navigate('/login')
 
     }
+  }
+
+  const handleSearch=(e)=>{
+    const {value} = e.target
+    updateSearch(value)
+    updatePageNo(1)
   }
 
   return (
@@ -40,7 +50,7 @@ const Navbar = () => {
         
         <section id="searchBox">
           <SearchIcon onClick={focusSearchBar} />
-          <input ref={searchBarRef} type="text" />
+          <input ref={searchBarRef} onChange={handleSearch} type="text" />
         </section>
       </div>
       <div className="nav-right">
@@ -81,7 +91,7 @@ const Navbar = () => {
           </NavLink>
         </section>
       </div>
-      <LoginDialog open={showLoginDialog} setOpen={setShowLoginDialog}/>
+      {/* <LoginDialog open={showLoginDialog} setOpen={setShowLoginDialog}/> */}
     </div>
   );
 };

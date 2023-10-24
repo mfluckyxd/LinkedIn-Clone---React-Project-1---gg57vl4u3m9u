@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import "../../../assets/styles/profileMenu.css";
 import { useNavigate } from "react-router";
@@ -44,7 +45,8 @@ const ProfileMenu = () => {
   return (
     <>
       <section id="profileIcon" onClick={handleClick}>
-        <AccountCircleRoundedIcon style={{ fontSize: "40px" }} />
+        <AccountCircleRoundedIcon style={{ fontSize: "28px" }} />
+        <span>Me<ArrowDropDownIcon style={{margin:'0 0 0 -1px'}}/></span>
       </section>
       <Menu
         anchorEl={anchorEl}
@@ -112,8 +114,6 @@ const ProfileMenu = () => {
             <Typography variant="subtitle1">Accounts</Typography>
             <MenuItem onClick={()=>{handleClose();navigate('/premium')}} >Try premium for free.</MenuItem>
             <MenuItem onClick={()=>{handleClose();navigate('/unavailable')}}>Settings & Privacy</MenuItem>
-            <MenuItem onClick={()=>{handleClose();navigate('/unavailable')}}>Help</MenuItem>
-            <MenuItem onClick={()=>{handleClose();navigate('/unavailable')}}>Languages</MenuItem>
 
             <Divider />
             <Typography variant="subtitle1">Manage</Typography>

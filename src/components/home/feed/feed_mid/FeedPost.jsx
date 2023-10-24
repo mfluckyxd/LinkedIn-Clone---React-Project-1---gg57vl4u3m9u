@@ -3,7 +3,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import SendIcon from "@mui/icons-material/Send";
-
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import React, { useState } from "react";
 import SingleComments from "./SingleComments";
 import UnavailableDialog from "../../../Errors/UnavailableDialog";
@@ -47,8 +47,6 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
   const handleUpVote = async (postID) => {
     if (isLoggedIn) {
       if (!likedPosts[postID]) {
-        console.log(postID);
-        console.log("inside if", likedPosts);
         setFeedPosts((prevFeedPosts) =>
           prevFeedPosts.map((post) =>
             post._id === postID
@@ -56,13 +54,10 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
               : post
           )
         );
-
         setLikedPosts((prevState) => {
           return { ...prevState, [postID]: true };
         });
       } else {
-        console.log("inside else", likedPosts);
-
         setFeedPosts((prevFeedPosts) =>
           prevFeedPosts.map((post) =>
             post._id === postID
@@ -75,21 +70,7 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
           delete newState[postID]; // Remove the post from likedPosts
           return newState;
         });
-        console.log("after setting", likedPosts);
       }
-      // try {
-      //   const res = await upVotePostApi(postID);
-      //   console.log(res);
-      //   if (res.status) {
-      //     setFeedPosts((prevFeedPosts) =>
-      //       prevFeedPosts.map((post) =>
-      //         post._id === postID
-      //           ? { ...post, likeCount: post.likeCount + 1 }
-      //           : post
-      //       )
-      //     );
-      //   }
-      // } catch (error) {}
     } else {
       setShowLoginDialog(true);
     }
@@ -129,9 +110,8 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
     if (isLoggedIn) {
       setShowErrorDialog(true);
     } else {
-      setShowLoginDialog(true)
+      setShowLoginDialog(true);
     }
-    
   };
 
   return (
@@ -164,7 +144,11 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
           onClick={() => handleUpVote(feedPost._id)}
           className="post-like"
         >
-          <ThumbUpOffAltIcon /> <span>Like</span>{" "}
+          <span style={{ transform: "scaleX(-1)", marginRight:'5px' }}>
+            {likedPosts[feedPost._id]?<ThumbUpAltIcon/>:<ThumbUpOffAltIcon />}
+            
+          </span>{" "}
+          <span>Like</span>{" "}
           {feedPost.likeCount !== 0 && (
             <span style={{ marginLeft: "0.5rem", fontWeight: "bold" }}>
               {feedPost.likeCount}
@@ -177,11 +161,8 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
         </button>
         <button onClick={handleShare} className="post-share">
           <SendIcon />
-          <span>Share
-            
-          </span>
+          <span>Share</span>
         </button>
-        
       </section>
       {showComments && (
         <section className="post-comments-section">
@@ -197,7 +178,13 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
             </button>
           </div>
           {postComments.map((comment, index) => {
-            return <SingleComments key={index} comment={comment} setShowErrorDialog={setShowErrorDialog} />;
+            return (
+              <SingleComments
+                key={index}
+                comment={comment}
+                setShowErrorDialog={setShowErrorDialog}
+              />
+            );
           })}
 
           {/* <div className="post-comment">
@@ -210,7 +197,7 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
         </section>
       )}
 
-      <UnavailableDialog open={showErrorDialog} setOpen={setShowErrorDialog}/>
+      <UnavailableDialog open={showErrorDialog} setOpen={setShowErrorDialog} />
     </div>
   );
 };

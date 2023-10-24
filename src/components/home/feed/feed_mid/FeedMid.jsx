@@ -11,23 +11,20 @@ import { upVotePostApi } from "../../../../utils/apis/userActionAPIs";
 import NewPostDialog from "./NewPostDialog";
 import { useNavigate } from "react-router";
 import { Margin } from "@mui/icons-material";
+import { useSearch } from "../../../../SearchContext";
 
 const FeedMid = () => {
   const [feedPosts, setFeedPosts] = useState([]);
-  const [pageNo, setPageNo] = useState(1);
+  // const [pageNo, setPageNo] = useState(1);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
 
-  
-
-
-
-
-  const [isFeedLoading, setIsFeedLoading] = useState(false)
+  const [isFeedLoading, setIsFeedLoading] = useState(false);
 
   const [showNewPostDialog, setShowNewPostDialog] = useState(false);
 
   const navigate = useNavigate();
+  const { searchValue, updatePageNo, pageNo } = useSearch();
 
   const handleNewPostDialog = () => {
     setShowNewPostDialog(true);
@@ -35,33 +32,33 @@ const FeedMid = () => {
 
   const fetchPosts = async () => {
     try {
-      if (pageNo===1) {
-        setIsFeedLoading(true)
-        
+      if (pageNo === 1) {
+        setIsFeedLoading(true);
+        setFeedPosts([]);
       }
-      const res = await getPosts(pageNo);
+      const res = await getPosts(pageNo, searchValue);
       if (res.success) {
-        setFeedPosts(prevFeedPosts => [...prevFeedPosts, ...res.data]);
+        setFeedPosts((prevFeedPosts) => [...prevFeedPosts, ...res.data]);
       }
     } catch (error) {
       console.log(error);
-    }finally{
-      setIsFeedLoading(false)
+    } finally {
+      setIsFeedLoading(false);
     }
   };
 
-  const handleScroll = ()=>{
+  const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
       document.documentElement.offsetHeight - 100
     ) {
-      setPageNo((prevPage) => prevPage + 1);
+      updatePageNo((prevPage) => prevPage + 1);
     }
-  }
+  };
 
   useEffect(() => {
     fetchPosts();
-  }, [pageNo]);
+  }, [pageNo, searchValue]);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -114,23 +111,26 @@ const FeedMid = () => {
           </section>
         )}
 
-        {isFeedLoading ? <Divider><CircularProgress sx={{margin:'0 auto'}}/></Divider>:<section className="feed-posts"> 
-
-          {feedPosts.map((feedPost) => (
-            <>
-            <FeedPost
-              key={feedPost._id}
-              feedPost={feedPost}
-              setFeedPosts={setFeedPosts}
-              setShowLoginDialog={setShowLoginDialog}
-            />
-              
-            </>
-          ))}
-        </section>}
+        {isFeedLoading ? (
+          <Divider>
+            <CircularProgress sx={{ margin: "0 auto" }} />
+          </Divider>
+        ) : ( feedPosts.length===0?<div>No Posts Found</div>:<section className="feed-posts">
+            {feedPosts.map((feedPost) => (
+              <>
+                <FeedPost
+                  key={feedPost._id}
+                  feedPost={feedPost}
+                  setFeedPosts={setFeedPosts}
+                  setShowLoginDialog={setShowLoginDialog}
+                />
+              </>
+            ))}
+          </section>
+          
+        )}
       </div>
       <LoginDialog open={showLoginDialog} setOpen={setShowLoginDialog} />
-      
     </div>
   );
 };

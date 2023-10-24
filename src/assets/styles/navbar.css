@@ -58,6 +58,7 @@
 .nav-right{
     display: flex;
     gap: 2rem;
+    align-items: center;
     /* background-color: transparent; */
     
 }
@@ -65,6 +66,14 @@
     color: #666666;
     border-right: 1px solid #666666;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    >span{
+        display: flex;
+        align-items: center;
+        margin-top: -8px;
+        font-size: 0.7rem;
+    }
 }
 .nav-premium{
     font-size: 13px;
@@ -89,24 +98,23 @@
 }
 @media (max-width: 650px){
     .nav-container{
-        overflow: auto;
+        
         padding: 0;
-        justify-content: space-evenly;
+        justify-content: space-between;
     }
-    /* #searchBox{
-        width: auto;
-    }
-    #searchBox input{
-        width: 5vw;
-    }
-    #searchBox input:focus{
-        display: block;
-        width: 20vw;
-    } */
     .nav-right{
         gap: 5vw;
     }
-   
-      
+    #profileIcon{
+        border: unset;
+        >span{
+            display: none;
+        }
+    }   
+}
+@media (max-width: 420px){
+    .nav-right{
+        gap: 3vw;
+    }
 }
 
