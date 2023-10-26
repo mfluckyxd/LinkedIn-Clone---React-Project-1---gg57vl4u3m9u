@@ -18,7 +18,7 @@ export const signUpApi = async (userInfo) => {
   } catch (err) {
     return {
       success: false,
-      msg: err.message,
+      msg: err.response.data.message,
     };
   }
 };
@@ -45,7 +45,7 @@ export const signInApi = async (userInfo)=>{
     } catch (error) {
         return {
             status:false,
-            error:error.message
+            error:error.response.data.message
         }
     }
 }

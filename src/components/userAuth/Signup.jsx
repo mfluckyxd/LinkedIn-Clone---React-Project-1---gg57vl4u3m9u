@@ -76,7 +76,7 @@ const Signup = () => {
       
       if (!res.success) {
         setSignUpError(res.msg);
-        console.log(signUpError);
+        console.log(res);
       } else {
         setSignUpError(false);
         navigate("/login");
@@ -183,7 +183,7 @@ const Signup = () => {
           </p>
           {signUpError && (
             <Alert variant="outlined" severity="error">
-              Something went wrong, Please try again later
+              {signUpError}
             </Alert>
           )}
           <Button

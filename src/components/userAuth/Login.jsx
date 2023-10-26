@@ -63,6 +63,7 @@ const Login = () => {
         
         navigate("/");
       } else {
+        
         setSignError(res.error);
       }
     } catch (error) {
@@ -141,7 +142,7 @@ const Login = () => {
               variant="outlined"
               severity="error"
             >
-              Something went wrong, Please try again later
+              {signInError}
             </Alert>
           )}
           <Button
