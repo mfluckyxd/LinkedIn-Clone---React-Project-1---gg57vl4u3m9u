@@ -5,10 +5,11 @@ import Feed from "./feed/Feed";
 import ProtectedRoute from "./ProtectedRoute";
 import MyNetwork from "./network/MyNetwork";
 import Jobs from "./jobs/Jobs";
-import UserProfile from "./UserProfile.jsx/UserProfile";
+import MyProfile from "./userProfile/MyProfile";
 import Notification from "./notification/Notification";
 import Premium from "./premium/Premium";
 import FeatureUnavailable from "../Errors/FeatureUnavailable";
+import UserProfiles from "./userProfile/UserProfiles";
 
 const Home = () => {
   return (
@@ -33,8 +34,11 @@ const Home = () => {
           <Route path="/business" element={<FeatureUnavailable />} />
           <Route
             path="/profile"
-            element={<ProtectedRoute Component={<UserProfile />} />}
+            element={<ProtectedRoute Component={<MyProfile />} />}
           />
+            <Route path="/profile/:id" element={<ProtectedRoute Component={<UserProfiles/>}/>} />
+
+          
           <Route path="/premium" element={<Premium />} />
           <Route path="/unavailable" element={<FeatureUnavailable />} />
           <Route path="*" element={<Navigate to={"/"} />} />

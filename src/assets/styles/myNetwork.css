@@ -5,7 +5,7 @@
   margin: 1.5rem 22vw 1.5rem 13vw;
 }
 .network-sidebar {
-  height: auto;
+  height: fit-content;
   border-radius: 15px;
   background-color: white;
   display: flex;
@@ -47,13 +47,37 @@
   flex-direction: column;
   /* gap: 1rem; */
 }
-.invite-heading{
+.people-heading{
     margin: 1rem;
+    font-size: 1.2rem;
     
 }
-.invite-body{
-    margin: 1.5rem 3.5rem;
-    font-size: 1.2rem;
+.people-body{
+    margin: 1.5rem 1rem 0 1rem; 
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.people-card{
+  display: flex;
+  gap: 1rem;
+  /* align-items: center; */
+  
+  >section{
+    >h4{
+      margin: 0;
+      font-weight: 550;
+      >a{
+        text-decoration: none;
+        color: unset;
+      }
+    }
+    >p{
+      margin: 0;
+      font-size: 0.9rem;
+      padding-bottom: 3px;
+    }
+  }
 }
 
 @media (max-width:650px) {
@@ -62,4 +86,10 @@
         flex-direction: column;
         margin :1rem;
     }
+}
+@media (max-width:900px) {
+  .my-network-container{
+  margin: 1.5rem 2rem 1.5rem 2rem;
+  
+  }
 }

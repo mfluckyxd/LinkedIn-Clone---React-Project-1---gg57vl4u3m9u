@@ -34,3 +34,24 @@ export const composeNewpost = async (newPost)=>{
   }
   
 }
+
+export const followAUser = async(id)=>{
+  const headers = headerWithJWT();
+
+  try {
+    const res = await axios.post(`https://academics.newtonschool.co/api/v1/linkedin/follow/${id}`,{},headers)
+    return res.data
+  } catch (error) {
+    return error.response.data
+  }
+}
+export const unfollowAUser = async(id)=>{
+  const headers = headerWithJWT();
+
+  try {
+    const res = await axios.delete(`https://academics.newtonschool.co/api/v1/linkedin/follow/${id}`,headers)
+    return res.data
+  } catch (error) {
+    return error.response.data
+  }
+}

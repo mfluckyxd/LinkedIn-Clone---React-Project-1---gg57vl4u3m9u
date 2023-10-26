@@ -7,10 +7,11 @@ export const getUserInfo = async (userId)=>{
     try{
         const res = await axios.get(
             `https://academics.newtonschool.co/api/v1/linkedin/user/${userId}`,
+           
             headers
         )
-        console.log(res);
+        return res.data
     }catch(err){
-
+        return err.response.data;
     }
 }

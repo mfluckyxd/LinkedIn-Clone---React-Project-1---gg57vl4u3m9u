@@ -7,6 +7,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import React, { useState } from "react";
 import SingleComments from "./SingleComments";
 import UnavailableDialog from "../../../Errors/UnavailableDialog";
+import { Link } from "react-router-dom";
 
 const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
   const userName = sessionStorage.getItem("userName");
@@ -43,6 +44,7 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
     name: "",
     comment: "",
   });
+  
 
   const handleUpVote = async (postID) => {
     if (isLoggedIn) {
@@ -118,15 +120,15 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
     <div className="feedpost-grid-container">
       <section className="post-header">
         <div className="header-left">
-          <div className="profile-picture">
+          <Link to={`/profile/${feedPost.author._id}`} className="profile-picture">
             {feedPost.author.profileImage ? (
               <Avatar src={feedPost.author.profileImage} />
             ) : (
               <Avatar />
             )}
-          </div>
+          </Link>
           <div className="about-user">
-            <h4>{feedPost.author.name}</h4>
+            <h4><Link to={`/profile/${feedPost.author._id}`}>{feedPost.author.name}</Link></h4>
             <p>{feedPost.channel.name || "Software Devloper"}</p>
           </div>
         </div>

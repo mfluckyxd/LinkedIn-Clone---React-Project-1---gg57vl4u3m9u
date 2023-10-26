@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { getUserInfo } from "../../../utils/apis/getUserInfo";
 import UnavailableDialog from "../../Errors/UnavailableDialog";
 
-const UserProfile = () => {
+const MyProfile = () => {
   const userName = sessionStorage.getItem("userName");
   const userId = sessionStorage.getItem("userId");
   const navigate = useNavigate();
@@ -41,15 +41,16 @@ const UserProfile = () => {
             />
             {profileImg ? (
               <Avatar
+              src={profileImg}
                 sx={{
                   width: 150,
                   height: 150,
                   marginTop: "-90px",
                   marginLeft: "30px",
                 }}
-              >
-                <img src={profileImg} alt="your-dp" />
-              </Avatar>
+              />
+              //</div>   <img  alt="your-dp" />
+             // </Avatar > 
             ):<Avatar
               sx={{
                 width: 150,
@@ -129,7 +130,7 @@ const UserProfile = () => {
                 <h3>
                   Bharati Vidyapeeth University College Of Engineering, Pune
                 </h3>
-                <p>Bachelor of Technology - B.Tech</p>
+                <p style={{color:'#282828'}}>Bachelor of Technology - B.Tech</p>
                 <span>Jul 2018 - Jul 2022</span>
               </div>
             </div>
@@ -192,4 +193,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default MyProfile;
