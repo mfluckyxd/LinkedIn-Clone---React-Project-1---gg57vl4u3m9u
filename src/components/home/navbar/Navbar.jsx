@@ -26,6 +26,7 @@ const Navbar = () => {
   const focusSearchBar = ()=>{
     if (searchBarRef.current) {
       searchBarRef.current.focus();
+      
     }
   }
 
@@ -41,6 +42,7 @@ const Navbar = () => {
     const {value} = e.target
     updateSearch(value)
     updatePageNo(1)
+    navigate('/')
   }
 
   return (

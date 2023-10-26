@@ -5,6 +5,7 @@ export const getUserInfo = async (userId)=>{
     const headers = headerWithJWT();
 
     try{
+        console.log(headers);
         const res = await axios.get(
             `https://academics.newtonschool.co/api/v1/linkedin/user/${userId}`,
            

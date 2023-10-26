@@ -7,7 +7,7 @@ import { followAUser, unfollowAUser } from "../../../utils/apis/userActionAPIs";
 import { Link } from "react-router-dom";
 
 const PeopleCard = ({ id }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState();
   const [followLoading, setFollowLoading] = useState(false);
 
