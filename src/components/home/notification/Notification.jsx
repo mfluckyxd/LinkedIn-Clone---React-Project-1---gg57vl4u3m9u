@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import SingleNoti from "./SingleNoti";
 import "../../../assets/styles/notification.css";
 import { Button } from "@mui/material";
+import UnavailableDialog from "../../Errors/UnavailableDialog";
 
 const Notification = () => {
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
+
   return (
     <div className="notification-section">
       <section className="notification-filter-button">
@@ -23,6 +26,7 @@ const Notification = () => {
         </Button>
         <Button
           variant="outlined"
+          onClick={() => setShowErrorDialog(true)}
           sx={{
             height: "2rem",
             color: "#666666",
@@ -38,6 +42,7 @@ const Notification = () => {
         </Button>
         <Button
           variant="outlined"
+          onClick={() => setShowErrorDialog(true)}
           sx={{
             height: "2rem",
             color: "#666666",
@@ -90,6 +95,8 @@ const Notification = () => {
           time={"2d"}
         />
       </section>
+      <UnavailableDialog open={showErrorDialog} setOpen={setShowErrorDialog} />
+
     </div>
   );
 };

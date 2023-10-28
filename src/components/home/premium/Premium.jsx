@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../../assets/styles/premium.css";
 import { Avatar, Button, Divider } from "@mui/material";
+import UnavailableDialog from "../../Errors/UnavailableDialog";
 
 const Premium = () => {
   const userName = sessionStorage.getItem("userName") || "";
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
+
   return (
     <div className="premium-section-container">
       <Divider />
@@ -55,11 +58,13 @@ const Premium = () => {
         </div>
         <Divider />
         <div className="submit-btn">
-          <Button variant="contained" sx={{ borderRadius: "25px" }}>
+          <Button variant="contained" sx={{ borderRadius: "25px" }} onClick={() => setShowErrorDialog(true)}>
             Submit
           </Button>
         </div>
       </section>
+      <UnavailableDialog open={showErrorDialog} setOpen={setShowErrorDialog} />
+
     </div>
   );
 };

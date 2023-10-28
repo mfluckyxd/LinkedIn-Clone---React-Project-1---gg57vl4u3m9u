@@ -41,7 +41,7 @@ const MyProfile = () => {
             />
             {profileImg ? (
               <Avatar
-              src={profileImg}
+                src={profileImg}
                 sx={{
                   width: 150,
                   height: 150,
@@ -49,17 +49,18 @@ const MyProfile = () => {
                   marginLeft: "30px",
                 }}
               />
+            ) : (
               //</div>   <img  alt="your-dp" />
-             // </Avatar > 
-            ):<Avatar
-              sx={{
-                width: 150,
-                height: 150,
-                marginTop: "-90px",
-                marginLeft: "30px",
-              }}
-            />}
-            
+              // </Avatar >
+              <Avatar
+                sx={{
+                  width: 150,
+                  height: 150,
+                  marginTop: "-90px",
+                  marginLeft: "30px",
+                }}
+              />
+            )}
 
             <h4 className="user-title">{userName}</h4>
             <p className="user-summary">
@@ -71,14 +72,22 @@ const MyProfile = () => {
             <div className="action-buttons">
               <Button
                 variant="contained"
-                sx={{ borderRadius: "25px", height: "1.6rem" }}
+                sx={{
+                  borderRadius: "25px",
+                  textTransform: "capitalize",
+                  fontWeight: "600",
+                }}
                 onClick={() => setShowErrorDialog(true)}
               >
                 I am...
               </Button>
               <Button
                 variant="outlined"
-                sx={{ borderRadius: "25px", height: "1.6rem" }}
+                sx={{
+                  borderRadius: "25px",
+                  textTransform: "capitalize",
+                  fontWeight: "600",
+                }}
                 onClick={() => fileInputRef.current.click()}
               >
                 Edit profile
@@ -130,7 +139,9 @@ const MyProfile = () => {
                 <h3>
                   Bharati Vidyapeeth University College Of Engineering, Pune
                 </h3>
-                <p style={{color:'#282828'}}>Bachelor of Technology - B.Tech</p>
+                <p style={{ color: "#282828" }}>
+                  Bachelor of Technology - B.Tech
+                </p>
                 <span>Jul 2018 - Jul 2022</span>
               </div>
             </div>
