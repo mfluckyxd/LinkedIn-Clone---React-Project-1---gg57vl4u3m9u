@@ -5,6 +5,7 @@
 }
 .user-profile-section .profile-left {
   flex: 2.5;
+  max-width: 100%;
 }
 .user-profile-section .profile-right {
   flex: 1;
