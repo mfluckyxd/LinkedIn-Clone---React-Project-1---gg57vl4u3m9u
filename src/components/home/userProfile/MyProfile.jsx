@@ -6,6 +6,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router";
 import { getUserInfo } from "../../../utils/apis/getUserInfo";
 import UnavailableDialog from "../../Errors/UnavailableDialog";
+import { useProfileImage } from "../../../ProfilePictureContext";
 
 const MyProfile = () => {
   const userName = sessionStorage.getItem("userName");
@@ -13,7 +14,8 @@ const MyProfile = () => {
   const navigate = useNavigate();
 
   const fileInputRef = useRef(null);
-  const [profileImg, setProfileImg] = useState(false);
+  // const [profileImg1, setProfileImg] = useState(false);
+  const {profileImg,updateProfileImg} = useProfileImage()
 
   // useEffect(()=>{
   //   getUserInfo(userId)
@@ -26,7 +28,7 @@ const MyProfile = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       // setImageSrc(imageUrl);
-      setProfileImg(imageUrl);
+      updateProfileImg(imageUrl);
     }
   };
 

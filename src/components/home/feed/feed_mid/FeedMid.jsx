@@ -12,12 +12,15 @@ import NewPostDialog from "./NewPostDialog";
 import { useNavigate } from "react-router";
 import { Margin } from "@mui/icons-material";
 import { useSearch } from "../../../../SearchContext";
+import { useProfileImage } from "../../../../ProfilePictureContext";
 
 const FeedMid = () => {
   const [feedPosts, setFeedPosts] = useState([]);
   // const [pageNo, setPageNo] = useState(1);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
+  const {profileImg} = useProfileImage()
+
 
   const [isFeedLoading, setIsFeedLoading] = useState(false);
 
@@ -72,6 +75,7 @@ const FeedMid = () => {
           <section className="new-post">
             <div className="new-post-form">
               <Avatar
+              src={profileImg}
                 sx={{ height: 60, width: 60, cursor: "pointer" }}
                 onClick={() => navigate("/profile")}
               />

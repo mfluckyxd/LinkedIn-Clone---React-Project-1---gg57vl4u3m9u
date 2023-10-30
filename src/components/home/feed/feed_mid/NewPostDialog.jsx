@@ -4,10 +4,12 @@ import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import "../../../../assets/styles/newPostDialog.css";
 import React, { useRef, useState } from "react";
 import { composeNewpost } from "../../../../utils/apis/userActionAPIs";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { useProfileImage } from "../../../../ProfilePictureContext";
 
 const NewPostDialog = ({ open, setOpen, setFeedPosts }) => {
   const userName = sessionStorage.getItem("userName");
+  const {profileImg} = useProfileImage()
 
   const fileInputRef = useRef(null);
 
@@ -18,26 +20,28 @@ const NewPostDialog = ({ open, setOpen, setFeedPosts }) => {
 
   const handleSubmit = () => {
     const postid = uuidv4();
-    if (userInputs.content) {
-          const newPost = {
-      author: {
-        name: userName,
-      },
-      content: userInputs.content,
-      channel: { image: userInputs.imageSrc },
-      likeCount: 3,
-      _id:postid
-    };
-  
-    setFeedPosts((prevFeedPosts) => [newPost, ...prevFeedPosts]);
-
-    setuserInputs({
-      imageSrc: "",
-      content: "",
-    });
-
+    if (!userInputs.content&&!userInputs.imageSrc) {
+      return
     }
+    // if (userInputs.content) {
+      const newPost = {
+        author: {
+          name: userName,
+          profileImage:profileImg
+        },
+        content: userInputs.content,
+        channel: { image: userInputs.imageSrc },
+        likeCount: 3,
+        _id: postid,
+      };
 
+      setFeedPosts((prevFeedPosts) => [newPost, ...prevFeedPosts]);
+
+      setuserInputs({
+        imageSrc: "",
+        content: "",
+      });
+    
 
     setOpen(false);
   };
@@ -99,7 +103,6 @@ const NewPostDialog = ({ open, setOpen, setFeedPosts }) => {
                 rows={"6"}
                 placeholder="What do you want to talk about?"
                 onChange={saveUserContent}
-                
               ></textarea>
             </div>
             <div>

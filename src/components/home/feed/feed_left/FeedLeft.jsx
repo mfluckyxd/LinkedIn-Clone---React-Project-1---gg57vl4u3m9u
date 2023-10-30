@@ -3,10 +3,13 @@ import "../../../../assets/styles/feedLeft.css";
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { useProfileImage } from "../../../../ProfilePictureContext";
 
 const FeedLeft = () => {
   const userName = sessionStorage.getItem("userName");
   const isLoggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
+  const {profileImg} = useProfileImage()
+  
   return (
     <div className="feed-left-container">
       <div className="feed-left">
@@ -17,7 +20,7 @@ const FeedLeft = () => {
               alt="profile cover"
             />
 
-            <Avatar sx={{ width: 60, height: 60, marginTop: "-30px" }} />
+            <Avatar src={profileImg} sx={{ width: 60, height: 60, marginTop: "-30px" }} />
             <h3><Link to={'/profile'}>Welcome, {userName}</Link></h3>
             <section className="skills">
               <span>React</span>
