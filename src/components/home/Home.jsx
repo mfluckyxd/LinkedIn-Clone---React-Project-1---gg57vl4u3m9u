@@ -14,24 +14,25 @@ import UserProfiles from "./userProfile/UserProfiles";
 const Home = () => {
   return (
     <div className="main-container">
-      <Navbar />
+      <ProtectedRoute Component={<Navbar />}/>
+      
       <div className="content">
         <Routes>
-          <Route path="/" element={<Feed />} />
+          <Route path="/" element={<ProtectedRoute Component={<Feed />}/>} />
           <Route
             path="/mynetwork"
-            element={<ProtectedRoute Component={<MyNetwork />} />}
+            element={<ProtectedRoute Component={<ProtectedRoute Component={<MyNetwork />}/>} />}
           />
           <Route path="/jobs" element={<Jobs />} />
           <Route
             path="/messages"
-            element={<ProtectedRoute Component={<FeatureUnavailable />} />}
+            element={<ProtectedRoute Component={<ProtectedRoute Component={<FeatureUnavailable />}/>} />}
           />
           <Route
             path="/notifications"
             element={<ProtectedRoute Component={<Notification />} />}
           />
-          <Route path="/business" element={<FeatureUnavailable />} />
+          <Route path="/business" element={<ProtectedRoute Component={<FeatureUnavailable />}/>} />
           <Route
             path="/profile"
             element={<ProtectedRoute Component={<MyProfile />} />}
@@ -39,9 +40,9 @@ const Home = () => {
             <Route path="/profile/:id" element={<ProtectedRoute Component={<UserProfiles/>}/>} />
 
           
-          <Route path="/premium" element={<Premium />} />
+          <Route path="/premium" element={<ProtectedRoute Component={<Premium />}/>} />
           <Route path="/unavailable" element={<FeatureUnavailable />} />
-          <Route path="*" element={<Navigate to={"/"} />} />
+          <Route path="*" element={<ProtectedRoute Component={<Navigate to={"/"} />}/>} />
         </Routes>
       </div>
     </div>
