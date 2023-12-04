@@ -75,9 +75,11 @@ const Login = () => {
 
   return (
     <div>
+      <section style={{margin:"1rem"}}>
       <Link to="/">
         <LinkedinLogo />
       </Link>
+      </section>
 
       <div className="login-container">
         <section className="form-container">
