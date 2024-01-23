@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactComponent as LinkedinLogo } from "../../assets/img/linkedinLogo.svg";
+import  LoginBg  from "../../assets/img/loginBg.svg";
 import "../../assets/styles/login.css";
 import {
   TextField,
@@ -177,7 +178,7 @@ const Login = () => {
         </section>
         <section className="login-image">
           <img
-            src="https://static.licdn.com/aero-v1/sc/h/dxf91zhqd2z6b0bwg85ktm5s4"
+            src={LoginBg}
             alt="login-background"
           />
         </section>

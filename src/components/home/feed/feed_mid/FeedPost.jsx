@@ -129,7 +129,7 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
           </Link>
           <div className="about-user">
             <h4><Link to={`/profile/${feedPost.author._id}`}>{feedPost.author.name}</Link></h4>
-            <p>{feedPost.channel.name || "Software Devloper"}</p>
+            <p>{feedPost?.channel?.name || "Software Devloper"}</p>
           </div>
         </div>
         <div className="header-right">
@@ -138,7 +138,7 @@ const FeedPost = ({ feedPost, setFeedPosts, setShowLoginDialog }) => {
       </section>
       <section className="post-content">{feedPost.content}</section>
       <section className="post-image">
-        <img src={feedPost.channel.image} alt="" />
+        <img src={feedPost?.channel?.image} alt="" />
       </section>
 
       <section id={feedPost._id || ""} className="post-feature">
